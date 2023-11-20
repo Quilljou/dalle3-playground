@@ -1,6 +1,6 @@
 # DALL·E 3 Playground
 
-[OpenAI Playground](https://platform.openai.com/playground) doesn't support  DALL·E 3 now (20/11/2023), so I developed this playground.
+As of November 20, 2023, DALL·E 3 is not supported by [OpenAI Playground](https://platform.openai.com/playground). Therefore, I have created this playground instead.
 
 [Live Preview](https://dalle3-playground.pages.dev)
 
