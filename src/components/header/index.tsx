@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Button } from '../ui/button'
 import { Github, MenuIcon, TwitterIcon } from 'lucide-react'
 import { useChatStore } from 'src/stores/chat'
@@ -8,7 +7,6 @@ interface IProps {
   leftNode?: ReactNode
 }
 export function Header(props: IProps) {
-  const { t } = useTranslation('translation')
   const { toggleSettingFormSheet } = useChatStore()
 
   return (

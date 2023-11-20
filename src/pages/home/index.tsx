@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet'
-import { useTranslation } from 'react-i18next'
 import { MessageList } from 'src/components/messages'
 import { SettingForm } from 'src/components/setting-form'
 import { InputBox } from 'src/components/input-box'
@@ -8,12 +7,10 @@ import { APIKeyDialog } from 'src/components/api-key-dialog'
 import { SettingFormSheet } from 'src/components/setting-form/sheet'
 
 export default function Home() {
-  const { t } = useTranslation('translation')
-
   return (
     <>
       <Helmet>
-        <title>{t('title')}</title>
+        <title>DALL·E 3 Playground</title>
       </Helmet>
       <div className="flex h-screen flex-col">
         <Header />
