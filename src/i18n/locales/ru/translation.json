@@ -1,12 +1,12 @@
 {
-  "title": "Vite React Tailwind Starter",
+  "title": "Площадка DALL·E 3",
   "features": "Особенности",
   "modernstack": "Современный и эффективный стек",
-  "modernstack-desc": "Построен с использованием vite, react, tailwindcss, shadcnui и других",
+  "modernstack-desc": "Построен с использованием Vite, React, Tailwind CSS, Shadcnui и других",
   "i18nsupport": "Поддержка i18n из коробки",
   "i18nsupport-desc": "Поставляйте свой продукт с поддержкой разных языков на родном уровне",
   "linters": "Проверка кода при сохранении",
-  "linters-desc": "Построен с использованием eslint, prettier, stylelint, commitlint",
-  "hero-title": "Создание приложений с лучшим DX, которую мы любим",
+  "linters-desc": "Построен с использованием ESLint, Prettier, Stylelint и Commitlint",
+  "hero-title": "Создание приложений с лучшим DX, который мы любим",
   "get-started": "Начать"
 }

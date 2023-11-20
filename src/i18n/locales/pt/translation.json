@@ -1,12 +1,12 @@
 {
-  "title": "Vite React Tailwind Starter",
+  "title": "DALL·E 3 Playground",
   "features": "Recursos",
   "modernstack": "Pilha moderna e eficiente",
-  "modernstack-desc": "Construído com vite, react, tailwindcss, shadcnui e mais",
+  "modernstack-desc": "Construído com Vite, React, Tailwind CSS, Shadcnui e mais",
   "i18nsupport": "Suporte i18n pronto para uso",
   "i18nsupport-desc": "Envie seu produto com diferentes idiomas nativamente",
-  "linters": "Verificar todos os códigos ao salvar",
-  "linters-desc": "Construído com eslint, prettier, stylelint, commitlint",
+  "linters": "Verificar todo o código ao salvar",
+  "linters-desc": "Construído com ESLint, Prettier, Stylelint e Commitlint",
   "hero-title": "Construindo aplicativos com a melhor experiência de desenvolvimento que amamos",
   "get-started": "Começar"
 }

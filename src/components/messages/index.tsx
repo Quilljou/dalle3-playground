@@ -40,7 +40,7 @@ const ChatItem = ({ type, content, isLoading }: Message) => {
         content
       ) : (
         <PhotoView src={src}>
-          <img src={src} className="w-[200px] cursor-pointer"></img>
+          <img src={src} className="w-[200px] cursor-pointer md:w-[300px]"></img>
         </PhotoView>
       )}
     </div>

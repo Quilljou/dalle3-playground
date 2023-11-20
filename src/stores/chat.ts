@@ -106,6 +106,10 @@ export const useChatStore = create(
           }))
         }
       },
+      clearMessages() {
+        set(() => ({ messages: [] }))
+        imageStore.clear()
+      },
     }),
     {
       name: 'chat-store',

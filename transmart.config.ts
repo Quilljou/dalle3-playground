@@ -6,4 +6,5 @@ export default {
   localePath: 'src/i18n/locales',
   openAIApiKey: process.env.OPENAI_API_KEY,
   openAIApiUrl: process.env.OPENAI_API_URL,
+  context: "Don't translate Playground",
 }
