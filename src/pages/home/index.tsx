@@ -5,6 +5,7 @@ import { SettingForm } from 'src/components/setting-form'
 import { InputBox } from 'src/components/input-box'
 import { Header } from 'src/components/header'
 import { APIKeyDialog } from 'src/components/api-key-dialog'
+import { SettingFormSheet } from 'src/components/setting-form/sheet'
 
 export default function Home() {
   const { t } = useTranslation('translation')
@@ -17,9 +18,7 @@ export default function Home() {
       <div className="flex h-screen flex-col">
         <Header />
         <div className="flex flex-1 overflow-hidden">
-          <div className="h-full flex-1 overflow-y-auto pb-[100px]">
-            <MessageList></MessageList>
-          </div>
+          <MessageList></MessageList>
           <div className="box-border hidden h-full w-[260px] border-l border-gray-200 p-4 md:block">
             <SettingForm></SettingForm>
           </div>
@@ -27,6 +26,7 @@ export default function Home() {
         <InputBox />
       </div>
       <APIKeyDialog />
+      <SettingFormSheet />
     </>
   )
 }

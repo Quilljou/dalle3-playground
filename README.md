@@ -1,6 +1,13 @@
-## DALL·E 3 Playground
+# DALL·E 3 Playground
 
 [Live Preview](https://dalle3-playground.pages.dev)
+
+## Features
+
+- Gallery mode
+- Persistent data
+- Multilingual support
+- Responsive UI
 
 
 ## Project Structure

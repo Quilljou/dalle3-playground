@@ -20,7 +20,7 @@ export const InputBox = () => {
         <Textarea
           rows={3}
           className="flex-1"
-          placeholder="Imagine your next image"
+          placeholder="Imagine your next picture"
           onChange={(e) => onInputChange(e.target.value)}
           value={inputPrompt}
           onKeyDown={handleKeyPress}

@@ -16,8 +16,13 @@ type ChatStore = {
   messages: Message[]
   isGenerating: boolean
   inputPrompt: string
+
   isShowingApiKeyDialog: boolean
   toggleApiKeyDialog: (value: boolean) => any
+
+  isShowingSettingFormSheet: boolean
+  toggleSettingFormSheet: (value: boolean) => any
+
   onInputChange: (message: string) => any
   addMessage: () => any
   fixBrokenMessage: () => any
@@ -28,11 +33,18 @@ export const useChatStore = create(
     (set, get) => ({
       messages: [],
       isGenerating: false,
-      isShowingApiKeyDialog: false,
       inputPrompt: '',
+
+      isShowingApiKeyDialog: false,
       toggleApiKeyDialog(value) {
         set({ isShowingApiKeyDialog: value })
       },
+
+      isShowingSettingFormSheet: false,
+      toggleSettingFormSheet(value) {
+        set({ isShowingSettingFormSheet: value })
+      },
+
       onInputChange(inputPrompt) {
         set(() => ({ inputPrompt }))
       },
