@@ -1,13 +1,15 @@
 # DALL·E 3 Playground
 
+[OpenAI Playground](https://platform.openai.com/playground) don't support  DALL·E 3 now (20/11/2023), so I developed this playground.
+
 [Live Preview](https://dalle3-playground.pages.dev)
 
 ## Features
 
-- Gallery mode
-- Persistent data
-- Multilingual support
-- Responsive UI
+- [x] Gallery mode
+- [x] Persistent data
+- [x] Responsive UI
+- [ ] Multilingual support
 
 
 ## Project Structure

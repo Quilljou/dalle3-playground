@@ -15,8 +15,10 @@ export const MessageList: React.FC = () => {
   }, [fixBrokenMessage])
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages.length])
+    setTimeout(() => {
+      scrollToBottom()
+    }, 100)
+  }, [messages])
 
   const scrollToBottom = () => {
     if (messageListRef.current) {
@@ -25,7 +27,7 @@ export const MessageList: React.FC = () => {
   }
 
   return (
-    <div className="h-full flex-1 overflow-y-auto pb-[120px]" ref={messageListRef}>
+    <div className="h-full flex-1 overflow-y-auto pb-[120px]" ref={messageListRef} style={{ scrollBehavior: 'smooth' }}>
       <PhotoProvider>
         {messages.map((message, index) => (
           <ChatItem {...message} key={index} />
