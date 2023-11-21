@@ -102,7 +102,7 @@ export const useChatStore = create(
               {
                 type: 'assistant',
                 content: error.message || 'Unknown error',
-                isError: false,
+                isError: true,
               },
             ],
           }))

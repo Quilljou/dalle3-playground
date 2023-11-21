@@ -3,8 +3,9 @@ import { PhotoProvider, PhotoView } from 'react-photo-view'
 import { Message, useChatStore } from 'src/stores/chat'
 import 'react-photo-view/dist/react-photo-view.css'
 import OpenAIIcon from '../../assets/icons/openai-logomark.svg'
-import { User2, Loader } from 'lucide-react'
+import { User2, Loader, AlertCircle } from 'lucide-react'
 import { imageStore } from 'src/lib/image-persist'
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 
 export const MessageList: React.FC = () => {
   const { messages, fixBrokenMessage } = useChatStore()
@@ -37,9 +38,8 @@ export const MessageList: React.FC = () => {
   )
 }
 
-const ChatItem = ({ type, content, isLoading }: Message) => {
+const ChatItem = ({ type, content, isLoading, isError }: Message) => {
   const [src, setSrc] = useState('')
-
   useEffect(() => {
     ;(async () => {
       const image = await imageStore.retrieveImage(content)
@@ -69,10 +69,20 @@ const ChatItem = ({ type, content, isLoading }: Message) => {
         content
       ) : (
         <>
-          {src && (
-            <PhotoView src={src}>
-              <img src={src} className="w-[200px] cursor-pointer md:w-[300px]"></img>
-            </PhotoView>
+          {isError ? (
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{content}</AlertDescription>
+            </Alert>
+          ) : (
+            <>
+              {src && (
+                <PhotoView src={src}>
+                  <img src={src} className="w-[200px] cursor-pointer md:w-[300px]"></img>
+                </PhotoView>
+              )}
+            </>
           )}
         </>
       )}
