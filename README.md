@@ -2,7 +2,10 @@
 
 As of November 20, 2023, DALL·E 3 is not supported by [OpenAI Playground](https://platform.openai.com/playground). Therefore, I have created this playground instead.
 
+![screenshot](./screenshots/screenshot.png)
+
 [Live Preview](https://dalle3-playground.pages.dev)
+
 
 ## Features
 
@@ -29,4 +32,11 @@ src
 └── vite-env.d.ts
 ```
 
+
+## Dev
+
+```sh
+yarn
+yarn dev
+```
 

@@ -22,7 +22,7 @@ export const SettingForm = () => {
         </Button>
       </div>
       <div>
-        <label className="block py-2">Quality:</label>
+        <label className="block py-2">Quality</label>
         <Select value={quality} onValueChange={(value) => setQuality(value as Quality)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Quality" />
@@ -40,7 +40,7 @@ export const SettingForm = () => {
       </div>
 
       <div>
-        <label className="block py-2">Size:</label>
+        <label className="block py-2">Size</label>
         <Select value={size} onValueChange={(value) => setSize(value as Size)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Size" />
@@ -58,7 +58,7 @@ export const SettingForm = () => {
       </div>
 
       <div>
-        <label className="block py-2">Style:</label>
+        <label className="block py-2">Style</label>
         <Select value={style!} onValueChange={(value) => setStyle(value as Style)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Style" />
@@ -76,7 +76,7 @@ export const SettingForm = () => {
       </div>
 
       <div>
-        <label className="block py-2">API Key:</label>
+        <label className="block py-2">API Key</label>
         <Input value={apiKey} onChange={(e) => setAPIKey(e.target.value)} type="password"></Input>
       </div>
 
