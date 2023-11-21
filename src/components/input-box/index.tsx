@@ -1,11 +1,22 @@
 import { Button } from '../ui/button'
-import { Loader2, SendIcon } from 'lucide-react'
+import { Loader2, SendIcon, Trash2 } from 'lucide-react'
 import { useChatStore } from 'src/stores/chat'
 import { Textarea } from '../ui/textarea'
 import { KeyboardEvent } from 'react'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../ui/alert-dialog'
 
 export const InputBox = () => {
-  const { addMessage, inputPrompt, onInputChange, isGenerating } = useChatStore()
+  const { addMessage, inputPrompt, onInputChange, isGenerating, clearMessages } = useChatStore()
 
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -25,9 +36,30 @@ export const InputBox = () => {
           value={inputPrompt}
           onKeyDown={handleKeyPress}
         />
-        <Button type="submit" size="icon" onClick={() => addMessage()} disabled={!inputPrompt}>
-          {isGenerating ? <Loader2 className="animate-spin" /> : <SendIcon />}
-        </Button>
+        <div className="flex flex-col gap-2">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button size="icon" variant={'ghost'}>
+                <Trash2 />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently remove all your generated images and prompts.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={clearMessages}>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <Button type="submit" size="icon" onClick={() => addMessage()} disabled={!inputPrompt}>
+            {isGenerating ? <Loader2 className="animate-spin" /> : <SendIcon />}
+          </Button>
+        </div>
       </div>
     </div>
   )

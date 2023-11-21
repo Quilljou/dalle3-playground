@@ -26,6 +26,7 @@ type ChatStore = {
   onInputChange: (message: string) => any
   addMessage: () => any
   fixBrokenMessage: () => any
+  clearMessages: () => any
 }
 
 export const useChatStore = create(
