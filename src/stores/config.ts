@@ -26,7 +26,7 @@ type ConfigStore = {
 
 const DEFAULT_CONFIG: Pick<ConfigStore, 'quality' | 'size' | 'style'> = {
   quality: 'standard',
-  style: 'natural',
+  style: 'vivid',
   size: '1024x1024',
 }
 
