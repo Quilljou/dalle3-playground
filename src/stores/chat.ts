@@ -27,7 +27,10 @@ type ChatStore = {
   addMessage: () => any
   fixBrokenMessage: () => any
   clearMessages: () => any
+  cancelGeneration: () => any
 }
+
+let controller: AbortController
 
 export const useChatStore = create(
   persist<ChatStore>(
@@ -79,8 +82,12 @@ export const useChatStore = create(
           style: style,
           quality: quality,
         }
+        controller = new AbortController()
+        const signal = controller.signal
         try {
-          const completion = await openai.images.generate(options)
+          const completion = await openai.images.generate(options, {
+            signal: signal,
+          })
           const base64 = completion.data[0].b64_json
           if (!base64) throw new Error('invalid base64')
           const key = await imageStore.storeImage('data:image/png;base64,' + base64)
@@ -110,6 +117,10 @@ export const useChatStore = create(
         } finally {
           set(() => ({ isGenerating: false }))
         }
+      },
+      cancelGeneration() {
+        controller?.abort()
+        set(() => ({ isGenerating: false }))
       },
       fixBrokenMessage() {
         const lastMessage = get().messages[get().messages.length - 1]

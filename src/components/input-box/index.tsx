@@ -16,11 +16,19 @@ import {
 } from '../ui/alert-dialog'
 
 export const InputBox = () => {
-  const { addMessage, inputPrompt, onInputChange, isGenerating, clearMessages } = useChatStore()
+  const { addMessage, inputPrompt, onInputChange, isGenerating, clearMessages, cancelGeneration } = useChatStore()
 
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault()
+      addMessage()
+    }
+  }
+
+  const handleClickSend = () => {
+    if (isGenerating) {
+      cancelGeneration()
+    } else {
       addMessage()
     }
   }
@@ -56,8 +64,14 @@ export const InputBox = () => {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-          <Button type="submit" size="icon" onClick={() => addMessage()} disabled={!inputPrompt}>
-            {isGenerating ? <Loader2 className="animate-spin" /> : <SendIcon />}
+          <Button type="submit" size="icon" onClick={handleClickSend} disabled={!inputPrompt}>
+            {isGenerating ? (
+              <>
+                <Loader2 className="animate-spin" />
+              </>
+            ) : (
+              <SendIcon />
+            )}
           </Button>
         </div>
       </div>
