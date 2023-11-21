@@ -27,7 +27,7 @@ export const MessageList: React.FC = () => {
   }
 
   return (
-    <div className="h-full flex-1 overflow-y-auto pb-[120px]" ref={messageListRef} style={{ scrollBehavior: 'smooth' }}>
+    <div className="flex-1 overflow-y-auto" ref={messageListRef} style={{ scrollBehavior: 'smooth' }}>
       <PhotoProvider>
         {messages.map((message, index) => (
           <ChatItem {...message} key={index} />

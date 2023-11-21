@@ -9,7 +9,6 @@
 - [x] Gallery mode
 - [x] Persistent data
 - [x] Responsive UI
-- [ ] Multilingual support
 
 
 ## Project Structure

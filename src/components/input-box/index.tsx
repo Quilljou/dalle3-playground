@@ -15,7 +15,7 @@ export const InputBox = () => {
   }
 
   return (
-    <div className="absolute bottom-0 z-10 w-full border-t border-gray-200 bg-white p-4">
+    <div className="w-full border-t border-gray-200 bg-white p-4">
       <div className="flex items-end space-x-2">
         <Textarea
           rows={3}

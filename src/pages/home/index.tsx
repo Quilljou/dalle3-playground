@@ -12,15 +12,17 @@ export default function Home() {
       <Helmet>
         <title>DALL·E 3 Playground</title>
       </Helmet>
-      <div className="flex h-screen flex-col">
+      <div className="flex h-full flex-col overflow-hidden">
         <Header />
         <div className="flex flex-1 overflow-hidden">
-          <MessageList></MessageList>
+          <div className="flex flex-1 flex-col overflow-hidden">
+            <MessageList></MessageList>
+            <InputBox />
+          </div>
           <div className="box-border hidden h-full w-[260px] border-l border-gray-200 p-4 md:block">
             <SettingForm></SettingForm>
           </div>
         </div>
-        <InputBox />
       </div>
       <APIKeyDialog />
       <SettingFormSheet />
