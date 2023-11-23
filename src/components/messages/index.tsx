@@ -60,7 +60,7 @@ const ChatItem = ({ type, content, isLoading, isError }: Message) => {
         ) : (
           <>
             <User2 />
-            User
+            You
           </>
         )}
       </div>
