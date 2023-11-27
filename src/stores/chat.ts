@@ -5,11 +5,15 @@ import { useConfigStore } from './config'
 import OpenAI from 'openai'
 import { imageStore } from 'src/lib/image-persist'
 
+export type ImageMeta = Pick<ImageGenerateParams, 'quality' | 'size' | 'style'>
+
 export interface Message {
   type: 'user' | 'assistant'
   content: string
   isError: boolean
   isLoading?: boolean
+  imageMeta?: ImageMeta
+  timestamp: number
 }
 
 type ChatStore = {
@@ -65,8 +69,8 @@ export const useChatStore = create(
           isGenerating: true,
           messages: [
             ...get().messages,
-            { type: 'user', content: get().inputPrompt, isError: false },
-            { type: 'assistant', content: '', isError: false, isLoading: true },
+            { type: 'user', content: get().inputPrompt, isError: false, timestamp: Date.now() },
+            { type: 'assistant', content: '', isError: false, isLoading: true, timestamp: Date.now() },
           ],
         }))
         const openai = new OpenAI({
@@ -91,6 +95,11 @@ export const useChatStore = create(
           const base64 = completion.data[0].b64_json
           if (!base64) throw new Error('invalid base64')
           const key = await imageStore.storeImage('data:image/png;base64,' + base64)
+          const imageMeta: ImageMeta = {
+            style: useConfigStore.getState().style,
+            size: useConfigStore.getState().size,
+            quality: useConfigStore.getState().quality,
+          }
           set(() => ({
             inputPrompt: '',
             messages: [
@@ -98,7 +107,9 @@ export const useChatStore = create(
               {
                 type: 'assistant',
                 content: key,
+                imageMeta,
                 isError: false,
+                timestamp: Date.now(),
               },
             ],
           }))
@@ -110,6 +121,7 @@ export const useChatStore = create(
                 type: 'assistant',
                 content: error.message || 'Unknown error',
                 isError: true,
+                timestamp: Date.now(),
               },
             ],
           }))

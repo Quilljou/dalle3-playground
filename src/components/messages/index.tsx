@@ -38,7 +38,7 @@ export const MessageList: React.FC = () => {
   )
 }
 
-const ChatItem = ({ type, content, isLoading, isError }: Message) => {
+const ChatItem = ({ type, content, isLoading, isError, imageMeta, timestamp }: Message) => {
   const [src, setSrc] = useState('')
   useEffect(() => {
     ;(async () => {
@@ -65,6 +65,11 @@ const ChatItem = ({ type, content, isLoading, isError }: Message) => {
         )}
       </div>
       {isLoading ? <Loader className="animate-spin" /> : null}
+      {imageMeta && (
+        <div className="mb-2 flex text-sm text-zinc-400">
+          {imageMeta?.size}, {imageMeta?.quality} quality, {imageMeta?.style} look
+        </div>
+      )}
       {type === 'user' ? (
         content
       ) : (
@@ -85,6 +90,11 @@ const ChatItem = ({ type, content, isLoading, isError }: Message) => {
             </>
           )}
         </>
+      )}
+      {timestamp && (
+        <div className="mt-2">
+          <span className="text-xs text-zinc-500">{new Date(timestamp).toLocaleString()}</span>
+        </div>
       )}
     </div>
   )
