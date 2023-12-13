@@ -21,6 +21,10 @@ export const InputBox = () => {
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault()
+      if (e.shiftKey) {
+        onInputChange(inputPrompt + '\n')
+        return
+      }
       addMessage()
     }
   }
