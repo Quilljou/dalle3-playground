@@ -3,9 +3,11 @@ import { PhotoProvider, PhotoView } from 'react-photo-view'
 import { Message, useChatStore } from 'src/stores/chat'
 import 'react-photo-view/dist/react-photo-view.css'
 import OpenAIIcon from '../../assets/icons/openai-logomark.svg'
-import { User2, Loader, AlertCircle } from 'lucide-react'
+import { User2, Loader, AlertCircle, Sparkles } from 'lucide-react'
 import { imageStore } from 'src/lib/image-persist'
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
+import { Button } from '../ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 export const MessageList: React.FC = () => {
   const { messages, fixBrokenMessage } = useChatStore()
@@ -66,8 +68,24 @@ const ChatItem = ({ type, content, isLoading, isError, imageMeta, timestamp }: M
       </div>
       {isLoading ? <Loader className="animate-spin" /> : null}
       {imageMeta && (
-        <div className="mb-2 flex text-sm text-zinc-400">
-          {imageMeta?.size}, {imageMeta?.quality} quality, {imageMeta?.style} look
+        <div className="mb-2 flex items-center gap-2 text-sm text-zinc-400">
+          <span>
+            {imageMeta?.size}, {imageMeta?.quality} quality, {imageMeta?.style} look
+          </span>
+          {imageMeta.revisedPrompt ? (
+            <Popover>
+              <PopoverTrigger>
+                <Button size="icon" variant={'ghost'}>
+                  <Sparkles />
+                </Button>
+              </PopoverTrigger>
+
+              <PopoverContent>
+                <div className="text-lg font-bold">Revised prompt:</div>
+                {imageMeta.revisedPrompt}
+              </PopoverContent>
+            </Popover>
+          ) : null}
         </div>
       )}
       {type === 'user' ? (

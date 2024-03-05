@@ -5,7 +5,9 @@ import { useConfigStore } from './config'
 import OpenAI from 'openai'
 import { imageStore } from 'src/lib/image-persist'
 
-export type ImageMeta = Pick<ImageGenerateParams, 'quality' | 'size' | 'style'>
+export type ImageMeta = Pick<ImageGenerateParams, 'quality' | 'size' | 'style'> & {
+  revisedPrompt?: string
+}
 
 export interface Message {
   type: 'user' | 'assistant'
@@ -92,13 +94,14 @@ export const useChatStore = create(
           const completion = await openai.images.generate(options, {
             signal: signal,
           })
-          const base64 = completion.data[0].b64_json
+          const { b64_json: base64, revised_prompt: revisedPrompt } = completion?.data?.[0] || {}
           if (!base64) throw new Error('invalid base64')
           const key = await imageStore.storeImage('data:image/png;base64,' + base64)
           const imageMeta: ImageMeta = {
             style: useConfigStore.getState().style,
             size: useConfigStore.getState().size,
             quality: useConfigStore.getState().quality,
+            revisedPrompt,
           }
           set(() => ({
             inputPrompt: '',
