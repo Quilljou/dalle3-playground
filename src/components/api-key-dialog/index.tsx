@@ -40,7 +40,7 @@ export const APIKeyDialog = () => {
             >
               OpenAI API key
             </a>
-            below.
+            {' '}below.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
