@@ -57,7 +57,7 @@ const ChatItem = ({ type, content, isLoading, isError, imageMeta, timestamp }: M
             <div className="w-6">
               <OpenAIIcon />
             </div>
-            DALL·E 3
+            DALL·E
           </>
         ) : (
           <>
@@ -70,7 +70,7 @@ const ChatItem = ({ type, content, isLoading, isError, imageMeta, timestamp }: M
       {imageMeta && (
         <div className="mb-2 flex items-center gap-2 text-sm text-zinc-400">
           <span>
-            {imageMeta?.size}, {imageMeta?.quality} quality, {imageMeta?.style} look
+            {imageMeta?.model}, {imageMeta?.size}, {imageMeta?.quality} quality, {imageMeta?.style} look
           </span>
           {imageMeta.revisedPrompt ? (
             <Popover>

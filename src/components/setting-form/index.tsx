@@ -1,15 +1,18 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from 'src/components/ui/select'
-import { Quality, Size, Style, useConfigStore } from 'src/stores/config'
+import { Model, Quality, Size, Style, useConfigStore } from 'src/stores/config'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { HelpCircle } from 'lucide-react'
+import { ImageModel } from 'openai/resources'
 
 const sizes: Size[] = ['1024x1024', '1792x1024', '1024x1792']
 const qualities: Quality[] = ['standard', 'hd']
 const styles: Style[] = ['vivid', 'natural']
+const models: Model[] = ['dall-e-2', 'dall-e-3']
 
 export const SettingForm = () => {
-  const { quality, setQuality, size, setSize, style, setStyle, apiKey, setAPIKey, reset } = useConfigStore()
+  const { quality, setQuality, size, setSize, style, setStyle, apiKey, setAPIKey, model, setModel, reset } =
+    useConfigStore()
 
   return (
     <div className="flex w-full flex-col space-y-4">
@@ -21,6 +24,25 @@ export const SettingForm = () => {
           </a>
         </Button>
       </div>
+
+      <div>
+        <label className="block py-2">Quality</label>
+        <Select value={model} onValueChange={(value) => setModel(value as ImageModel)}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Model" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {models.map((item) => (
+                <SelectItem value={item} key={item}>
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
       <div>
         <label className="block py-2">Quality</label>
         <Select value={quality} onValueChange={(value) => setQuality(value as Quality)}>

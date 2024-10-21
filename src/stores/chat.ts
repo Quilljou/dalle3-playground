@@ -5,7 +5,7 @@ import { useConfigStore } from './config'
 import OpenAI from 'openai'
 import { imageStore } from 'src/lib/image-persist'
 
-export type ImageMeta = Pick<ImageGenerateParams, 'quality' | 'size' | 'style'> & {
+export type ImageMeta = Pick<ImageGenerateParams, 'model' | 'quality' | 'size' | 'style'> & {
   revisedPrompt?: string
 }
 
@@ -59,7 +59,7 @@ export const useChatStore = create(
         set(() => ({ inputPrompt }))
       },
       async addMessage() {
-        const { style, size, apiKey, quality } = useConfigStore.getState()
+        const { style, size, apiKey, quality, model } = useConfigStore.getState()
         if (!apiKey) {
           get().toggleApiKeyDialog(true)
           return
@@ -81,7 +81,7 @@ export const useChatStore = create(
         })
         const options: ImageGenerateParams = {
           prompt: get().inputPrompt,
-          model: 'dall-e-3',
+          model: model,
           n: 1,
           response_format: 'b64_json',
           size: size,
@@ -100,6 +100,7 @@ export const useChatStore = create(
           const imageMeta: ImageMeta = {
             style: useConfigStore.getState().style,
             size: useConfigStore.getState().size,
+            model: useConfigStore.getState().model,
             quality: useConfigStore.getState().quality,
             revisedPrompt,
           }
