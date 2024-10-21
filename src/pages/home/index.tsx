@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>DALL·E 3 Playground</title>
+        <title>DALL·E Playground</title>
       </Helmet>
       <div className="flex h-full flex-col overflow-hidden">
         <Header />

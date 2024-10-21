@@ -12,7 +12,7 @@ export function Header(props: IProps) {
   return (
     <div className="flex w-full items-center justify-between border-b border-gray-200 px-4 py-4">
       <a href="/" className="font-bold md:text-lg">
-        DALL·E 3 Playground
+        DALL·E Playground
       </a>
       <div className="flex items-center gap-2">
         {/* <LanguageSelector /> */}
