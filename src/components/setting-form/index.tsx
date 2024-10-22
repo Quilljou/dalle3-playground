@@ -26,7 +26,7 @@ export const SettingForm = () => {
       </div>
 
       <div>
-        <label className="block py-2">Quality</label>
+        <label className="block py-2">Model</label>
         <Select value={model} onValueChange={(value) => setModel(value as ImageModel)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Model" />
