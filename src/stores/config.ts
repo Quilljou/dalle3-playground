@@ -25,14 +25,22 @@ type ConfigStore = {
   model: Model
   setModel: (model: Model) => void
 
+  useAzure: boolean
+  setUseAzure: (useAzure: boolean) => void
+  azureEndpoint: string
+  setAzureEndpoint: (endpoint: string) => void
+  azureDeploymentName: string
+  setAzureDeploymentName: (name: string) => void
+
   reset: () => void
 }
 
-const DEFAULT_CONFIG: Pick<ConfigStore, 'model' | 'quality' | 'size' | 'style'> = {
+const DEFAULT_CONFIG: Pick<ConfigStore, 'model' | 'quality' | 'size' | 'style' | 'useAzure'> = {
   model: 'dall-e-3',
   quality: 'standard',
   style: 'vivid',
   size: '1024x1024',
+  useAzure: false,
 }
 
 export const useConfigStore = create(
@@ -40,6 +48,9 @@ export const useConfigStore = create(
     (set, get) => ({
       ...DEFAULT_CONFIG,
       apiKey: '',
+      azureEndpoint: '',
+      azureDeploymentName: '',
+
       setAPIKey(key) {
         set({ apiKey: key })
       },
@@ -54,6 +65,15 @@ export const useConfigStore = create(
       },
       setModel(model) {
         set({ model })
+      },
+      setUseAzure(useAzure) {
+        set({ useAzure })
+      },
+      setAzureEndpoint(azureEndpoint) {
+        set({ azureEndpoint })
+      },
+      setAzureDeploymentName(azureDeploymentName) {
+        set({ azureDeploymentName })
       },
       reset() {
         set({ ...DEFAULT_CONFIG })
