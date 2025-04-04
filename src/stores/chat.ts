@@ -59,9 +59,16 @@ export const useChatStore = create(
         set(() => ({ inputPrompt }))
       },
       async addMessage() {
-        const { style, size, apiKey, quality, model } = useConfigStore.getState()
+        const { style, size, apiKey, quality, model, useAzure, azureEndpoint, azureDeploymentName } =
+          useConfigStore.getState()
+
         if (!apiKey) {
           get().toggleApiKeyDialog(true)
+          return
+        }
+
+        if (useAzure && (!azureEndpoint || !azureDeploymentName)) {
+          alert('Please configure Azure OpenAI settings')
           return
         }
 
@@ -75,13 +82,26 @@ export const useChatStore = create(
             { type: 'assistant', content: '', isError: false, isLoading: true, timestamp: Date.now() },
           ],
         }))
-        const openai = new OpenAI({
-          apiKey: apiKey,
-          dangerouslyAllowBrowser: true,
-        })
+
+        let openai
+        if (useAzure) {
+          openai = new OpenAI({
+            apiKey: apiKey,
+            baseURL: `${azureEndpoint}/openai/deployments/${azureDeploymentName}`,
+            defaultQuery: { 'api-version': '2023-12-01-preview' },
+            defaultHeaders: { 'api-key': apiKey },
+            dangerouslyAllowBrowser: true,
+          })
+        } else {
+          openai = new OpenAI({
+            apiKey: apiKey,
+            dangerouslyAllowBrowser: true,
+          })
+        }
+
         const options: ImageGenerateParams = {
           prompt: get().inputPrompt,
-          model: model,
+          model: useAzure ? undefined : model,
           n: 1,
           response_format: 'b64_json',
           size: size,

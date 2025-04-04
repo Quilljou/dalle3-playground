@@ -15,7 +15,7 @@ import { useChatStore } from 'src/stores/chat'
 import { KeyboardEvent } from 'react'
 
 export const APIKeyDialog = () => {
-  const { setAPIKey, apiKey } = useConfigStore()
+  const { setAPIKey, apiKey, useAzure } = useConfigStore()
   const { isShowingApiKeyDialog, toggleApiKeyDialog } = useChatStore()
 
   const handleKeyPress = (e: KeyboardEvent) => {
@@ -29,18 +29,22 @@ export const APIKeyDialog = () => {
     <Dialog open={isShowingApiKeyDialog} onOpenChange={toggleApiKeyDialog}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>OpenAI API Key</DialogTitle>
+          <DialogTitle>{useAzure ? 'Azure OpenAI API Key' : 'OpenAI API Key'}</DialogTitle>
           <DialogDescription>
             Please enter your{' '}
             <a
-              href="http://platform.openai.com/account/api-keys"
+              href={
+                useAzure
+                  ? 'https://portal.azure.com/#blade/WebsitesExtension/SettingsBlade/token-store/'
+                  : 'http://platform.openai.com/account/api-keys'
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-2"
             >
-              OpenAI API key
-            </a>
-            {' '}below.
+              {useAzure ? 'Azure OpenAI API key' : 'OpenAI API key'}
+            </a>{' '}
+            below.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
